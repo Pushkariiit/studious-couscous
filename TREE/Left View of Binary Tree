@@ -10,6 +10,7 @@ Left view of following tree is 1 2 4 8.
    \
      8   
      
+     1 2 4 8
 Code: 
 
 void LeftView(Node* root,int level,vector<int> &res){
