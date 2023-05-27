@@ -1,0 +1,24 @@
+The diameter of a tree (sometimes called the width) is the number of nodes on the longest path between two end nodes. The diagram below shows two trees each with 
+diameter nine, the leaves that form the ends of the longest path are shaded (note that there is more than one path in each tree of length nine, but no path 
+longer than nine nodes). 
+
+Code :
+
+class Solution {
+  public:
+    // Function to return the diameter of a Binary Tree.
+    
+    int maxdiameter(Node* root,int &diameter){
+        if(root==NULL) return 0;
+        int leftheight = maxdiameter(root->left,diameter);
+        int rightheight = maxdiameter(root->right,diameter);
+        
+        diameter = max(diameter,leftheight+rightheight+1);
+        return (1 + max(leftheight,rightheight));
+    }
+    int diameter(Node* root) {
+        int diameter=0;
+        maxdiameter(root,diameter);
+        return (diameter);
+    }
+};
