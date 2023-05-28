@@ -1,0 +1,28 @@
+Given a Binary Tree. Check whether it is Symmetric or not, i.e. whether the binary tree is a Mirror image of itself or not.
+
+Input:
+         5
+       /   \
+      1     1
+     /       \
+    2         2
+Output: True
+Explanation: Tree is mirror image of
+itself i.e. tree is symmetric
+
+Code :
+
+class Solution{
+    public:
+    bool check(Node* left,Node* right){
+        if(left==NULL || right==NULL) return left==right;
+        
+        if(left->data!=right->data) return false;
+        
+        return (check(left->left,right->right)&&(check(left->right,right->left)));
+    }
+    bool isSymmetric(struct Node* root)
+    {
+	    return (root==NULL || check(root->left,root->right));
+    }
+};
