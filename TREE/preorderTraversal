@@ -1,0 +1,24 @@
+Given a binary tree, find its preorder traversal.
+
+code: 
+
+vector <int> preorder(Node* root)
+{
+  // Your code here
+  vector<int>ans;
+  stack<Node*>st;
+  st.emplace(root);
+  
+  while(!st.empty()){
+      Node* temp = st.top();
+      ans.emplace_back(temp->data);
+      st.pop();
+      if(temp->right!=NULL){
+          st.emplace(temp->right);
+      }
+      if(temp->left!=NULL){
+          st.emplace(temp->left);
+      }
+      
+  }return ans;
+}
