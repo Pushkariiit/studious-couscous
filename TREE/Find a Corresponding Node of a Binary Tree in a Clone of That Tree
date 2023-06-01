@@ -1,0 +1,35 @@
+Given two binary trees original and cloned and given a reference to a node target in the original tree.
+
+The cloned tree is a copy of the original tree.
+
+Return a reference to the same node in the cloned tree.
+
+Note that you are not allowed to change any of the two trees or the target node and the answer must be a reference to a node in the cloned tree.
+
+Code:
+class Solution{
+public:
+ 
+    TreeNode* solve(TreeNode* n1,TreeNode* n2,TreeNode* target){
+        if(n1==NULL) return NULL;
+        if(n1==target&&n1->val == n2->val) return n2;
+        TreeNode* left = solve(n1->left,n2->left,target);
+        TreeNode* right = solve(n1->right,n2->right,target);
+        if(left==NULL) return right;
+        else return left;
+    }
+
+    void preorder(TreeNode* root,TreeNode* &ref,TreeNode* target){
+        if(root==NULL) return;
+        if(root->val==target->val) ref=root;
+        preorder(root->left,ref,target);
+        preorder(root->right,ref,target);
+    }
+    TreeNode* getTargetCopy(TreeNode* original, TreeNode* cloned, TreeNode* target) {
+        
+        // return solve(original,cloned,target);
+        TreeNode* ref=NULL;
+        preorder(cloned,ref,target);
+        return ref;
+    }
+};
