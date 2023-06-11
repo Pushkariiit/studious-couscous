@@ -1,0 +1,43 @@
+#include<bits/stdc++.h>
+using namespace std;
+const int N = 1e5+7;
+const int mod = 1e9+7;
+int g[N];
+int subtreee_sum[N];
+int val[N];
+
+void DFS(int v,int parent){
+    subtree_sum += val[vertex];
+    for(int child:g[v]){
+        if(child==parent) continue;
+
+        DFS(child,v);
+        subtreee_sum[vertex]+=subtreee_sum[child];
+    }
+}
+int main(){
+    int nodes;
+    cin>>nodes;
+
+    for(int i=0;i<nodes-1;i++){
+        int n1,n2;
+        cin>>n1>>n2;
+
+        g[n1].push_back(n2);
+        g[n2].push_back(n1);
+    }
+    DFS(1,0);
+
+    long long ans = 0;
+
+    for(int i=2;i<=nodes;i++){
+        long long part1 = subtreee_sum(i);
+        long long part2 = subtreee_sum(1) - part1;
+
+        long long product = (part1*(1LL)*part2)%M;
+
+        ans = max(ans,product);
+    }
+
+    cout<<ans<<endl;
+}
